@@ -69,7 +69,7 @@ With no keys the app runs in **demo mode** (local, simulated results). For Quest
 
 ## Honest status
 
-- Text, image, voice and ad-draft paths have been exercised against the real Meta APIs by the author.
+- Muse Spark text/vision and Muse Image calls and Instagram publishing have been exercised for real. The Muse Voice adapter and the Marketing API ad-draft path are implemented and unit-tested with mocks; end-to-end runs against live accounts are being verified before the deadline.
 - Video generation uses Seedance 2.5 through fal.ai because no Meta video model was available to us; the shot-list planning is done by Muse Spark.
 - Full hand-tracking comfort in the headset is still being tuned.
 
