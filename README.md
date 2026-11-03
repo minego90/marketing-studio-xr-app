@@ -20,7 +20,6 @@ Small businesses in Latin America rarely have a marketing agency. They have a ph
 | **Photos** | Four guided product photos captured in XR (front, right, left, back) with a quality check | on-device |
 | **Direction & Images** | Creative direction and campaign images from the product photos | **Muse Spark 1.3**, **Muse Image 1.0** |
 | **Video** | A cinematic shot list (cuts every 2–3 s, one motivated camera move per shot, motivated light, audio layers) then a 9:16 clip | **Muse Spark 1.3** (director), Seedance 2.5 via fal.ai *(not a Meta model)* |
-| **Voice** | Push-to-talk speech input inside the headset | **Muse Voice transcribe 1.0** |
 | **Ads draft** | Audience, placements, budget and copy prepared; campaign, ad set, creative and ad created in Meta Ads Manager **PAUSED** | Meta Marketing API |
 | **Publish** | Optional Instagram publishing after an explicit confirmation | Instagram Graph API |
 
@@ -41,7 +40,7 @@ Quest 3 browser (WebXR, Three.js r180)
   └─ Canvas 2D panels used as 3D textures + DOM fallback/accessibility layer
         │  HTTPS (Cloudflare tunnel or local network)
 Node.js server (server.mjs, no dependencies)
-  ├─ lib/providers.mjs     Meta Model API: Muse Spark, Muse Image, Muse Voice
+  ├─ lib/providers.mjs     Meta Model API: Muse Spark, Muse Image
   ├─ lib/strategy.mjs      market/audience strategy
   ├─ lib/video-director.mjs  shot-list planner and validator
   ├─ lib/fal.mjs           Seedance prompt builder / client
@@ -69,7 +68,7 @@ With no keys the app runs in **demo mode** (local, simulated results). For Quest
 
 ## Honest status
 
-- Muse Spark text/vision and Muse Image calls and Instagram publishing have been exercised for real. The Muse Voice adapter and the Marketing API ad-draft path are implemented and unit-tested with mocks; end-to-end runs against live accounts are being verified before the deadline.
+- Muse Spark text/vision, Muse Image, Instagram publishing and the Meta Marketing API ad-draft flow (budget, dates, audience, distance, objective; image and video creatives, always PAUSED) run against the real services from the headset. We are still polishing small details of the ad-draft step.
 - Video generation uses Seedance 2.5 through fal.ai because no Meta video model was available to us; the shot-list planning is done by Muse Spark.
 - Full hand-tracking comfort in the headset is still being tuned.
 
