@@ -1,0 +1,13 @@
+<!doctype html><meta charset="utf-8"><title>Personajes · Marketing Studio XR</title>
+<body style="margin:0;background:#9b7cf2;overflow:hidden"><canvas id="c" style="width:100vw;height:100vh;display:block"></canvas>
+<script type="module">
+import * as THREE from '../vendor/three.module.js';
+import { makePixelPerson, makePixelDog, WORKERS } from './pixelpeople.js';
+const c=document.getElementById('c'),r=new THREE.WebGLRenderer({canvas:c,antialias:true});r.setSize(innerWidth,innerHeight,false);
+const s=new THREE.Scene();s.background=new THREE.Color(0x9b7cf2);
+const cam=new THREE.PerspectiveCamera(30,innerWidth/innerHeight,.1,50);cam.position.set(0,0.75,5.6);cam.lookAt(0,0.5,0);
+const people=WORKERS.map((w,i)=>{const p=makePixelPerson(w);p.position.x=(i-2.5)*0.8;s.add(p,p.userData.shadow);p.userData.shadow.position.x=p.position.x;return p});
+const dog=makePixelDog();dog.position.set(2.6,0,0.4);s.add(dog);
+window.__tris=people.reduce((a,p)=>a+p.userData.tris,0)+dog.userData.tris;
+r.setAnimationLoop(t=>{people.forEach((p,i)=>{p.rotation.y=Math.sin(t/900+i)*0.5;const a=p.userData.parts;a.armL.rotation.x=Math.sin(t/300+i)*.5;a.armR.rotation.x=-Math.sin(t/300+i)*.5});r.render(s,cam)});
+</script>

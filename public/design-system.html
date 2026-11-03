@@ -1,0 +1,21 @@
+<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Aurora · sistema de diseño</title><link rel="stylesheet" href="/fonts.css"><style>body{margin:0;background:#09080f;color:#f6f3fd;font-family:Inter,system-ui,sans-serif}main{max-width:1440px;margin:0 auto;padding:24px}h1{font:800 28px "Inter Display",Inter,sans-serif;letter-spacing:-.02em}canvas{width:100%;border-radius:24px;border:1px solid #ffffff1a;display:block}</style></head><body><main><h1>Aurora · sistema de diseño de Marketing Studio XR</h1><canvas id="c" width="1400" height="1060"></canvas></main><script type="module">
+import {T,glass,inset,drawButton,chip,icon,luma,eyebrow,txt,wrapText,ring,progressBar,background,aurora,font}from'/ui-kit.js';
+const c=document.getElementById('c'),g=c.getContext('2d');await document.fonts.ready;
+function draw(time=0){const t=time/1000;background(g,1400,1060);
+eyebrow(g,'Aurora · tokens',40,60);txt(g,'Tipografía, color, botones e iconos',40,110,{size:44,weight:800,family:'display'});
+const cols=[['violet',T.violet],['rose',T.rose],['amber',T.amber],['mint',T.mint],['warn',T.warn],['danger',T.danger],['text',T.text],['muted',T.muted]];
+cols.forEach(([n,col],i)=>{g.fillStyle=col;g.beginPath();g.roundRect(40+i*165,140,150,60,16);g.fill();txt(g,n,40+i*165,225,{size:18,color:T.muted});});
+let x=40;for(const [v,l,ic] of [['primary','Crear todo','sparkle'],['secondary','Secundario','camera'],['secondary','Activo','check',true],['ghost','Ghost','plus'],['danger','Peligro','x']]){drawButton(g,{x,y:260,w:250,h:78,label:l,ic:ic==='sparkle'?'wand':ic,variant:v,active:arguments.length&&false,trailing:v==='primary'?'arrow-right':null,hover:0});x+=266;}
+drawButton(g,{x:40,y:356,w:250,h:78,label:'Activo',ic:'check',variant:'secondary',active:true});
+drawButton(g,{x:306,y:356,w:250,h:78,label:'Deshabilitado',variant:'primary',disabled:true});
+drawButton(g,{x:572,y:356,w:250,h:78,label:'Hover',variant:'secondary',hover:1});
+drawButton(g,{x:838,y:356,w:200,h:64,label:'Pequeño',variant:'secondary',small:true});
+let ix=40;for(const n of ['check','arrow-right','plus','x','camera','image','megaphone','film','send','shield','cube','mic','sliders','upload','download','eye','lock','refresh','compass','palette','pen','layers','info','clock','target','link','heart','comment','bookmark','list','grip','wand','ruler','home']){const col=(ix-40)/70|0;icon(g,n,60+((ix-40)%1190),480+Math.floor((ix-40)/1190)*70,34,T.text);ix+=70;}
+glass(g,40,620,420,200,28);txt(g,'Tarjeta de cristal',70,670,{size:26,weight:700,family:'display'});wrapText(g,'Superficies translúcidas con borde de luz. Texto muted para apoyo, nunca para acciones.',70,712,360,{size:21});
+glass(g,480,620,420,200,28,{strong:true,glow:'rgba(157,140,255,0.4)'});txt(g,'Tarjeta fuerte + glow',510,670,{size:26,weight:700,family:'display'});
+inset(g,920,620,440,84,20);txt(g,'Campo de texto',950,672,{size:24,color:T.muted});inset(g,920,720,440,84,20,{focus:true});txt(g,'Campo enfocado',950,772,{size:24});
+chip(g,40,850,'Demo · sin IA',{color:T.amber,dot:true});chip(g,240,850,'Pauta: borrador',{color:T.mint,ic:'shield'});ring(g,560,885,34,.86,{label:'86',size:26});progressBar(g,640,874,300,12,.62);
+['idle','thinking','success','review','alert'].forEach((m,i)=>{luma(g,1010+i*85,890,26,{mood:m,t});txt(g,m,1010+i*85,965,{size:14,align:'center',color:T.muted});});
+requestAnimationFrame(draw);}
+requestAnimationFrame(draw);
+</script></body></html>

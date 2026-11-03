@@ -1,0 +1,13 @@
+{
+  "name": "aumentados-campaign-xr",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "start": "node server.mjs",
+    "test": "node --test scripts/*.test.mjs",
+    "check": "node --check server.mjs && node --check lib/providers.mjs && node --check lib/ads.mjs && node --check lib/ads-planner.mjs && node --check lib/kling.mjs && node --check lib/video-director.mjs && node --check public/app.js && node --check public/xr.js && node --check lib/strategy.mjs && node --check public/studio-domain.js && node --check public/companion.js && node --check public/camera-hud.js && node --check public/wrist-ui.js && node --check public/wrist-buttons.js && node --check public/lab/office3d.js && node --check lib/insights.mjs"
+  },
+  "engines": {
+    "node": ">=22"
+  }
+}

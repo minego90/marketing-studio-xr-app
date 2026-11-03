@@ -1,0 +1,33 @@
+{
+ "version": 1,
+ "principles": [
+  "La IA propone, el humano aprueba: ninguna acción con costo o publicación ocurre sin confirmación.",
+  "Un paso a la vez, con una sola recomendación concreta.",
+  "Separar lo observado de lo supuesto; no inventar métricas, precios ni resultados.",
+  "Demo = cero llamadas externas. Real = solo con interruptor global + confirmación.",
+  "La pauta jamás se activa desde el programa: nace PAUSED o queda como borrador local."
+ ],
+ "roles": [
+  {"id":"luma","name":"Luma · Orquestadora","icon":"sparkle","mission":"Guía al usuario por el flujo, decide el siguiente mejor paso y reparte el trabajo a los demás agentes.","skills":["marketing-digital-meta","pauta-segura-borrador"],"inputs":["estado de la app"],"outputs":["siguiente acción","plan de pasos","avisos"],"tools":["local"],"handoff":["estratega","fotografa","director-arte"]},
+  {"id":"estratega","name":"Estratega","icon":"compass","mission":"Convierte la idea del cliente en estrategia: objetivo, público (hipótesis), concepto y KPIs.","skills":["marketing-digital-meta","copywriting-es"],"inputs":["producto","temática","público","objetivo","métricas opcionales"],"outputs":["concepto","plan de 4 fotos","ángulos de copy","KPIs"],"tools":["local","muse-spark"],"handoff":["fotografa"]},
+  {"id":"fotografa","name":"Fotógrafa · coach de captura","icon":"camera","mission":"Guía las cuatro vistas y evalúa cada toma (luz, nitidez, encuadre).","skills":["fotografia-producto"],"inputs":["foto tomada","vista actual"],"outputs":["una corrección concreta","aprobada / repetir"],"tools":["local-photo-qa"],"handoff":["director-arte"]},
+  {"id":"director-arte","name":"Director de arte","icon":"palette","mission":"Escribe la dirección visual de cada pieza conservando la identidad del producto.","skills":["fotografia-producto","marketing-digital-meta"],"inputs":["4 vistas","estrategia"],"outputs":["4 conceptos con prompt de imagen"],"tools":["local","muse-spark","muse-image"],"handoff":["copywriter"]},
+  {"id":"copywriter","name":"Copywriter","icon":"pen","mission":"Titulares de 2–6 palabras, copy de feed y hooks sin promesas.","skills":["copywriting-es"],"inputs":["conceptos","objetivo"],"outputs":["titular por pieza","copy","hashtags"],"tools":["local","muse-spark"],"handoff":["media-buyer","director-video"]},
+  {"id":"media-buyer","name":"Media buyer · pauta","icon":"megaphone","mission":"Propone objetivo, público, ubicaciones, presupuesto y prueba A/B como borrador.","skills":["marketing-digital-meta","pauta-segura-borrador"],"inputs":["piezas elegidas","ciudad","tope diario opcional"],"outputs":["propuesta de pauta","Ficha 4 pantallas","CSV Ads Manager"],"tools":["local","muse-spark"],"handoff":["guardian","revisor"]},
+  {"id":"director-video","name":"Director de video","icon":"film","mission":"Tres hooks con guion por planos y prompt para el modelo de video.","skills":["video-social-ia","copywriting-es"],"inputs":["imagen elegida","duración"],"outputs":["3 hooks","prompt de video","guion de voz en off"],"tools":["local","muse-spark","kling"],"handoff":["revisor"]},
+  {"id":"xr-designer","name":"Diseñador XR","icon":"cube","mission":"Convierte las 4 vistas en un anuncio espacial (prisma, AR sobre mesa) y lo valida.","skills":["anuncios-webxr"],"inputs":["4 vistas","titular","CTA"],"outputs":["Anuncio XR","checklist de confort"],"tools":["local-webxr"],"handoff":["revisor"]},
+  {"id":"guardian","name":"Guardián de pauta","icon":"shield","mission":"Impide activar o gastar sin orden: verifica PAUSED, interruptores y confirmaciones.","skills":["pauta-segura-borrador"],"inputs":["plan de pauta","configuración"],"outputs":["luz verde / bloqueo"],"tools":["local"],"handoff":[]},
+  {"id":"revisor","name":"Revisor · QA final","icon":"check","mission":"Revisa copy, imágenes, pauta y XR contra las checklists y entrega un informe con capturas.","skills":["marketing-digital-meta","copywriting-es","fotografia-producto","anuncios-webxr"],"inputs":["campaña completa"],"outputs":["hallazgos priorizados","informe"],"tools":["local","playwright"],"handoff":[]}
+ ],
+ "pipeline": [
+  {"step":"idea","agent":"estratega","label":"Idea y objetivo"},
+  {"step":"photos","agent":"fotografa","label":"Cuatro vistas"},
+  {"step":"create","agent":"director-arte","label":"Crear propuestas"},
+  {"step":"words","agent":"copywriter","label":"Titulares y copy"},
+  {"step":"ads","agent":"media-buyer","label":"Pauta (borrador)"},
+  {"step":"video","agent":"director-video","label":"Hooks de video"},
+  {"step":"xr","agent":"xr-designer","label":"Anuncio XR"},
+  {"step":"guard","agent":"guardian","label":"Guardián"},
+  {"step":"review","agent":"revisor","label":"Revisión final"}
+ ]
+}

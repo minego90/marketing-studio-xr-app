@@ -1,0 +1,10 @@
+const {chromium}=require('playwright');
+(async()=>{const b=await chromium.launch({args:['--use-gl=swiftshader','--enable-unsafe-swiftshader','--ignore-gpu-blocklist']});
+const p=await b.newPage({viewport:{width:900,height:520}});
+p.on('pageerror',e=>console.log('PE',e.message));p.on('console',m=>{if(m.type()==='error')console.log('CE',m.text().slice(0,200))});
+await p.addInitScript(()=>{Object.defineProperty(navigator,'xr',{value:{isSessionSupported:async()=>true,requestSession:async()=>{throw new Error('stub')}},configurable:true});});
+await p.goto('http://localhost:8844/?access=test&xrdebug=1');await p.waitForTimeout(3000);
+const d=await p.evaluate(async()=>{const D=__xrDebug;const r=D.renderer;r.setClearColor(0x6b5a50,1);r.setSize(900,520,false);D.camera.aspect=900/520;D.camera.updateProjectionMatrix();
+ D.panels.forEach(x=>x.group.visible=false);D.officeFrame.visible=false;const w=D.panels[3].group;w.visible=true;w.position.set(0,0,-0.2);w.rotation.set(-0.35,0.35,0);w.updateMatrixWorld(true);
+ const out=[];for(const [h,pr,cam,off] of [[-1,-1,false,false],[0,-1,false,true],[1,1,true,true]]){for(let i=0;i<40;i++)D.wristBtns.update(1000+i*16,{hover:h,press:pr,camActive:cam,officeActive:off});r.render(D.scene,D.camera);out.push(document.querySelector('#xrCanvas').toDataURL('image/png'))}return out});
+const fs=require('fs');d.forEach((u,i)=>fs.writeFileSync(process.argv[2]+'/btn'+i+'.png',Buffer.from(u.split(',')[1],'base64')));await b.close()})();

@@ -1,0 +1,9 @@
+/* Inter + Inter Display (SIL OFL 1.1), subconjunto latino. Ver vendor/fonts/OFL-NOTICE.txt */
+@font-face{font-family:"Inter";font-weight:400;font-style:normal;font-display:swap;src:url(/vendor/fonts/Inter-Regular.woff) format("woff")}
+@font-face{font-family:"Inter";font-weight:500;font-style:normal;font-display:swap;src:url(/vendor/fonts/Inter-Medium.woff) format("woff")}
+@font-face{font-family:"Inter";font-weight:600;font-style:normal;font-display:swap;src:url(/vendor/fonts/Inter-SemiBold.woff) format("woff")}
+@font-face{font-family:"Inter";font-weight:700;font-style:normal;font-display:swap;src:url(/vendor/fonts/Inter-Bold.woff) format("woff")}
+@font-face{font-family:"Inter";font-weight:800;font-style:normal;font-display:swap;src:url(/vendor/fonts/Inter-ExtraBold.woff) format("woff")}
+@font-face{font-family:"Inter Display";font-weight:600;font-style:normal;font-display:swap;src:url(/vendor/fonts/InterDisplay-SemiBold.woff) format("woff")}
+@font-face{font-family:"Inter Display";font-weight:700;font-style:normal;font-display:swap;src:url(/vendor/fonts/InterDisplay-Bold.woff) format("woff")}
+@font-face{font-family:"Inter Display";font-weight:800;font-style:normal;font-display:swap;src:url(/vendor/fonts/InterDisplay-ExtraBold.woff) format("woff")}

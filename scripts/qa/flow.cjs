@@ -1,0 +1,21 @@
+const {chromium}=require('playwright');
+const SP=process.argv[2];
+(async()=>{const b=await chromium.launch({args:['--use-gl=swiftshader','--enable-unsafe-swiftshader','--ignore-gpu-blocklist','--use-fake-device-for-media-stream','--use-fake-ui-for-media-stream']});
+const ctx=await b.newContext({viewport:{width:1500,height:1000},permissions:['camera']});const p=await ctx.newPage();
+p.on('pageerror',e=>console.log('PE',e.message));p.on('console',m=>{if(m.type()==='error')console.log('CE',m.text().slice(0,160))});
+await p.goto('http://localhost:8844/?access=test');await p.waitForTimeout(2500);
+const S=()=>p.evaluate(()=>({page:__studio.state.page,notice:__studio.state.notice,busy:__studio.state.busy,sel:__studio.state.selected?.length,mode:__studio.state.mode}));
+const A=async(id,w=600)=>{try{await p.evaluate(i=>__studio.action(i),id)}catch(e){console.log('ERR',id,e.message)}await p.waitForTimeout(w);const s=await S();console.log(id.padEnd(22),JSON.stringify(s))};
+const shot=async n=>{await p.waitForTimeout(400);await p.screenshot({path:SP+'/f_'+n+'.png'})};
+await shot('0');
+for(const pg of ['strategy','capture','results','brief','gallery','publish','ads','video','xr','review','settings'])await A('nav:'+pg,300);
+await A('nav:strategy');await A('strategy:local',1200);await shot('1strategy');await A('strategy:continue',800);
+for(let i=0;i<4;i++){await A('example',900)}
+await shot('2capture');
+await A('generate',12000);await shot('3generated');
+await A('select-all');await A('nav:publish');await shot('4publish');
+await A('confirm-publish');await A('publish',2500);await shot('5published');
+await A('nav:video');await A('video:plan',4000);await shot('6video');
+await A('nav:ads');await A('ads:plan',4000);await shot('7ads');
+console.log(JSON.stringify(await p.evaluate(()=>({cfg:null,paid:__studio.state.paidEnabled,receipt:__studio.state.publishReceipt,adsStage:__studio.state.adsStage}))));
+await b.close()})();

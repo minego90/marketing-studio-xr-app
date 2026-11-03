@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Laboratorio · aumentados</title>
+<link rel="stylesheet" href="/fonts.css">
+<style>
+:root{--bg:#09080f;--text:#f6f3fd;--muted:#aaa2c0;--faint:#6f6785;--amber:#ffc78c;--rose:#ff8fb8;--violet:#a392ff;--mint:#7fe9bf;--warn:#ffd27a;--danger:#ff8f8f;--glass:rgba(255,255,255,.06);--line:rgba(255,255,255,.12)}
+*{box-sizing:border-box}
+html,body{margin:0;height:100%;background:var(--bg);color:var(--text);font:15px/1.45 Inter,system-ui,sans-serif;overflow:hidden}
+#scene{position:fixed;inset:0;width:100%;height:100%;display:block;touch-action:none}
+.bar{position:fixed;top:0;left:0;right:0;display:flex;gap:10px;align-items:center;justify-content:space-between;padding:16px 20px;pointer-events:none;z-index:3}
+.brand{font:800 22px "Inter Display",Inter,sans-serif;letter-spacing:-.02em}
+.brand small{font:700 11px Inter;letter-spacing:.2em;color:var(--faint);margin-left:10px}
+.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.chip,.btn{pointer-events:auto;font:650 13px Inter;padding:9px 14px;border-radius:99px;background:var(--glass);border:1px solid var(--line);color:var(--muted);backdrop-filter:blur(14px);text-decoration:none;cursor:default}
+.chip b{color:var(--mint)}
+.btn{cursor:pointer;color:var(--text);min-height:40px;display:inline-flex;align-items:center;gap:6px}
+.btn:hover{border-color:var(--amber)}
+.btn.primary{border:0;color:#16111f;font-weight:800;background:linear-gradient(135deg,var(--amber),var(--rose) 55%,var(--violet))}
+.btn.on{border-color:var(--mint);color:var(--mint)}
+.btn[disabled]{opacity:.4;cursor:not-allowed}
+#evs{position:fixed;left:20px;bottom:54px;z-index:3;display:none;flex-direction:column;gap:6px;max-height:60vh;overflow:auto}#evs.open{display:flex}#evs .btn{justify-content:flex-start;font-size:12px;min-height:34px;padding:6px 12px}
+#hint{position:fixed;left:20px;bottom:18px;z-index:3;color:var(--muted);font-size:13px;pointer-events:none}
+#drawer{position:fixed;top:0;right:0;bottom:0;width:min(580px,100vw);transform:translateX(105%);transition:transform .3s cubic-bezier(.2,.8,.2,1);z-index:4;background:rgba(14,11,24,.88);backdrop-filter:blur(22px);border-left:1px solid var(--line);display:flex;flex-direction:column}
+#drawer.open{transform:none}
+#drawer header{display:flex;align-items:center;gap:12px;padding:20px 22px 12px}
+#drawer h2{margin:0;font:700 26px "Inter Display",Inter;letter-spacing:-.02em;flex:1}
+#drawer .who{font:700 11px Inter;letter-spacing:.18em;color:var(--amber);text-transform:uppercase}
+#body{overflow:auto;padding:4px 22px 28px;flex:1}
+.card{background:var(--glass);border:1px solid var(--line);border-radius:20px;padding:16px;margin:12px 0}
+.card h3{margin:0 0 8px;font:700 15px Inter}
+.muted{color:var(--muted)}.faint{color:var(--faint);font-size:13px}
+.ok{color:var(--mint)}.warn{color:var(--warn)}.bad{color:var(--danger)}
+canvas.view{width:100%;border-radius:16px;background:#0b0914;display:block;touch-action:none}
+label{display:block;font:600 12px Inter;color:var(--muted);margin:10px 0 4px;letter-spacing:.04em}
+input[type=text],textarea{width:100%;background:rgba(8,7,14,.6);border:1px solid var(--line);border-radius:12px;padding:10px 12px;color:var(--text);font:500 15px Inter}
+input[type=range]{width:100%;accent-color:#ff8fb8}
+input[type=color]{width:100%;height:36px;border:1px solid var(--line);border-radius:10px;background:transparent}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.tabs{display:flex;gap:8px;flex-wrap:wrap}
+.kv{display:grid;grid-template-columns:auto 1fr;gap:6px 14px;font-size:14px}.kv span:nth-child(odd){color:var(--muted)}
+.thumbs{display:flex;gap:8px;flex-wrap:wrap}.thumbs img{height:90px;border-radius:12px;border:1px solid var(--line)}
+.pill{display:inline-block;padding:3px 10px;border-radius:99px;font:700 11px Inter;letter-spacing:.08em;background:rgba(127,233,191,.14);color:var(--mint)}
+.pill.warn{background:rgba(255,210,122,.14);color:var(--warn)}.pill.bad{background:rgba(255,143,143,.14);color:var(--danger)}
+svg text{font:600 11px Inter;fill:#aaa2c0}
+@media(max-width:700px){.bar{flex-direction:column;align-items:flex-start}}
+</style>
+</head>
+<body>
+<canvas id="scene" aria-label="Oficina de marketing en miniatura"></canvas>
+<div class="bar">
+  <div class="brand">aumentados<small>LABORATORIO · DEMO</small></div>
+  <div class="row">
+    <span class="chip">Sin IA · <b>$0</b></span>
+    <button class="btn" id="xrbtn" hidden>🥽 Entrar en XR</button>
+    <button class="btn" id="time">🌗 Hora: automática</button>
+    <button class="btn" id="evt">Simular evento</button>
+    <button class="btn" id="all">Activar a todos</button>
+    <a class="btn" href="/">← Estudio</a>
+  </div>
+</div>
+<div id="evs"></div>
+<div id="hint">Arrastra para girar · rueda para acercar · toca una sala para abrirla</div>
+<aside id="drawer" aria-live="polite"><header><div><div class="who" id="who"></div><h2 id="title"></h2></div><button class="btn" id="close">Cerrar</button></header><div id="body"></div></aside>
+<script type="module" src="/lab/lab.js"></script>
+</body>
+</html>

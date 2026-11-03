@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Anuncio XR · aumentados</title>
+<link rel="stylesheet" href="/fonts.css">
+<style>
+:root{--bg:#09080f;--text:#f6f3fd;--muted:#aaa2c0;--amber:#ffc78c;--rose:#ff8fb8;--violet:#a392ff;--mint:#7fe9bf}
+*{box-sizing:border-box}
+html,body{margin:0;height:100%;background:var(--bg);color:var(--text);font-family:Inter,system-ui,sans-serif;overflow:hidden}
+canvas{display:block;touch-action:none}
+#hud{position:fixed;inset:0;pointer-events:none;display:flex;flex-direction:column;justify-content:space-between;padding:20px 20px calc(20px + env(safe-area-inset-bottom))}
+.top,.bottom{display:flex;gap:12px;align-items:center;justify-content:space-between;pointer-events:none}
+.brand{font:800 22px "Inter Display",Inter,sans-serif;letter-spacing:-.02em}
+.brand i{display:inline-block;width:10px;height:10px;border-radius:50%;background:linear-gradient(135deg,var(--amber),var(--rose),var(--violet));margin-left:4px}
+.chip{pointer-events:auto;font:600 13px Inter;letter-spacing:.04em;padding:9px 14px;border-radius:99px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.14);color:var(--muted);backdrop-filter:blur(14px)}
+.chip b{color:var(--mint)}
+.title{font:700 clamp(26px,5vw,44px)/1.05 "Inter Display",Inter,sans-serif;letter-spacing:-.03em;max-width:12em}
+.title small{display:block;font:500 15px Inter;color:var(--muted);letter-spacing:0;margin-top:10px;max-width:28em}
+.btn{pointer-events:auto;cursor:pointer;border:0;font:700 16px Inter;color:#16111f;padding:16px 24px;min-height:56px;border-radius:20px;background:linear-gradient(135deg,var(--amber),var(--rose) 55%,var(--violet));box-shadow:0 10px 30px rgba(255,143,184,.3)}
+.btn.ghost{background:rgba(255,255,255,.08);color:var(--text);box-shadow:none;border:1px solid rgba(255,255,255,.16)}
+.btn[disabled]{opacity:.45;cursor:not-allowed}
+.face{font:800 12px Inter;letter-spacing:.2em;color:var(--amber);text-transform:uppercase}
+.row{display:flex;gap:10px;flex-wrap:wrap}
+@media(max-width:560px){.bottom{flex-direction:column;align-items:stretch}.btn{width:100%}}
+</style>
+</head>
+<body>
+<div id="hud">
+  <div class="top"><div class="brand">aumentados<i></i></div><div class="chip" id="mode">Sin IA · <b>$0</b></div></div>
+  <div class="title" id="title"><span id="titleText">Anuncio XR</span><small id="sub">Gira el prisma con el dedo, el mouse o la mano. Cada cara es una vista real de tu producto.</small></div>
+  <div class="bottom">
+    <div><div class="face" id="face">Frente</div><div class="chip" id="hint" style="margin-top:8px">Arrastra para girar · rueda para acercar</div></div>
+    <div class="row"><button class="btn ghost" id="spin">Girar solo</button><a class="btn" id="cta" style="text-decoration:none;display:inline-flex;align-items:center" target="_blank" rel="noopener">Visitar perfil</a><button class="btn" id="enter" disabled>Entrar en AR</button></div>
+  </div>
+</div>
+<script type="module" src="/xr-ad.js"></script>
+</body>
+</html>
