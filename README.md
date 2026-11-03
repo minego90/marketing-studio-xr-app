@@ -1,3 +1,5 @@
+![Marketing Studio XR](docs/media/hero.jpg)
+
 # Marketing Studio XR
 
 **A mixed-reality marketing studio for Meta Quest 3. A small-business owner walks around a 3D office and builds a complete Instagram campaign — strategy, copy, images, a 9:16 video and a paused Meta Ads draft — guided by an AI assistant powered by Meta's Muse Spark.**
@@ -11,6 +13,26 @@ Built for the **Meta Global AI Developer Hackathon** · Indie Developer track ·
 ## Why
 
 Small businesses in Latin America rarely have a marketing agency. They have a phone, a product and a few hours. Marketing Studio XR puts a whole agency workflow inside a headset: photograph the product, talk to the assistant (Luma), pick a direction, get images and a short vertical video, and prepare the ad — with hard guardrails so nothing is published or spent by accident.
+
+## From one real photo to an ad
+
+![Photo to ad](docs/media/flow.jpg)
+
+## In the headset
+
+Real captures from a Meta Quest 3 session:
+
+![Quest captures](docs/media/ui.jpg)
+
+## The office
+
+The 3D agency is a live scene: animated team members, screens showing work in progress, and a day/night cycle that follows the real clock.
+
+![Office dusk and night](docs/media/office.jpg)
+
+## Generated with Muse Image
+
+![Muse Image gallery](docs/media/gallery.jpg)
 
 ## What it does
 
