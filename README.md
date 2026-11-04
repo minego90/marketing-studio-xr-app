@@ -10,6 +10,10 @@ Built for the **Meta Global AI Developer Hackathon** · Indie Developer track ·
 
 ---
 
+## Live office demo
+
+Open the 3D agency office in your browser (no install, no keys): **https://minego90.github.io/marketing-studio-xr-app/demo/**. The team works and talks, you can rotate the office, and a side panel shows one real photo, the images Muse Image made from it, and an AI video. It reuses the same office code that runs inside the headset.
+
 ## Why
 
 Small businesses in Latin America rarely have a marketing agency. They have a phone, a product and a few hours. Marketing Studio XR puts a whole agency workflow inside a headset: photograph the product, talk to the assistant (Luma), pick a direction, get images and a short vertical video, and prepare the ad — with hard guardrails so nothing is published or spent by accident.
