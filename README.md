@@ -88,6 +88,10 @@ With no keys the app runs in **demo mode** (local, simulated results). For Quest
 
 `npm test` runs ~76 tests covering the video director, ad guardian and planner, provider adapters, UI flow, the English/Spanish layer and the XR hit-testing. External APIs are mocked.
 
+## Vision: one pipeline, many devices
+
+This version runs as a WebXR app on Meta Quest 3/3S, built to push the programming to the limit. The same pipeline (photos, Muse Spark, Muse Image, video, Meta platform APIs) can be brought to Meta glasses with a display and to a phone version; only the way the photo is taken and the step-by-step flow change. In the future we will all have this capability on lighter, more portable glasses, with the same technology.
+
 ## Honest status
 
 - Muse Spark text/vision, Muse Image, Instagram publishing and the Meta Marketing API ad-draft flow (budget, dates, audience, distance, objective; image and video creatives, always PAUSED) run against the real services from the headset. We are still polishing small details of the ad-draft step.
