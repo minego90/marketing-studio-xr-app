@@ -91,8 +91,12 @@ With no keys the app runs in **demo mode** (local, simulated results). For Quest
 ## Honest status
 
 - Muse Spark text/vision, Muse Image, Instagram publishing and the Meta Marketing API ad-draft flow (budget, dates, audience, distance, objective; image and video creatives, always PAUSED) run against the real services from the headset. We are still polishing small details of the ad-draft step.
-- Video generation uses Seedance 2.5 through fal.ai because no Meta video model was available to us; the shot-list planning is done by Muse Spark.
+- Video generation uses Seedance 2.5 through fal.ai because no Meta video model was available to us; the shot-list planning is done by Muse Spark. Video is also by far the most expensive step to generate with AI, so it is optional and guarded by the paid-API switch.
 - Full hand-tracking comfort in the headset is still being tuned.
+
+## Notice
+
+Any third-party characters, brands or products that appear in the demo video (for example a plush game character or a fantasy creature used as test subjects) are fan-made demonstrations for educational purposes only. They belong to their respective owners, and this project is not affiliated with or endorsed by them. No such characters are included in this repository.
 
 ## License
 
