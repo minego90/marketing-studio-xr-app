@@ -16,7 +16,7 @@ test('entrada de fal: 720p vertical, referencias @ImageN y plan por segundos', (
   assert.equal(promptFromPlan('texto libre con @image_1'), 'texto libre con @Image1');
 });
 test('cola de fal: envío, estado y resultado; la clave no se filtra', async () => {
-  const old = global.fetch, calls = [], env = { FAL_KEY: 'fal-secreta-123' };
+  const old = global.fetch, calls = [], env = { FAL_KEY: 'fal_clave_ficticia_no_usar' };
   global.fetch = async (url, o = {}) => {
     calls.push({ url: String(url), auth: o.headers?.Authorization, method: o.method || 'GET' });
     if (String(url).endsWith('/kling/v4/reference-to-video')) return new Response(JSON.stringify({ request_id: 'r1', status_url: 'https://queue.fal.run/kling/v4/requests/r1/status', response_url: 'https://queue.fal.run/kling/v4/requests/r1' }));
@@ -25,12 +25,12 @@ test('cola de fal: envío, estado y resultado; la clave no se filtra', async () 
   };
   try {
     const sub = await submitFal(env, { prompt: 'x' });
-    assert.equal(sub.id, 'r1'); assert.equal(calls[0].auth, 'Key fal-secreta-123');
+    assert.equal(sub.id, 'r1'); assert.equal(calls[0].auth, 'Key fal_clave_ficticia_no_usar');
     assert.equal((await readFal(env, sub)).status, 'procesando');
     const done = await readFal(env, sub);
     assert.equal(done.status, 'succeeded'); assert.equal(done.url, 'https://v3b.fal.media/f.mp4');
-    global.fetch = async () => new Response(JSON.stringify({ detail: 'Exhausted balance fal-secreta-123' }), { status: 403 });
-    await assert.rejects(submitFal(env, { prompt: 'x' }), e => /Exhausted balance/.test(e.message) && !e.message.includes('fal-secreta-123'));
+    global.fetch = async () => new Response(JSON.stringify({ detail: 'Exhausted balance fal_clave_ficticia_no_usar' }), { status: 403 });
+    await assert.rejects(submitFal(env, { prompt: 'x' }), e => /Exhausted balance/.test(e.message) && !e.message.includes('fal_clave_ficticia_no_usar'));
     await assert.rejects(submitFal({}, {}), /FAL_KEY/);
   } finally { global.fetch = old; }
 });
