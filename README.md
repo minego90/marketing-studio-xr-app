@@ -12,6 +12,8 @@ Built for the **Meta Global AI Developer Hackathon** · Indie Developer track ·
 
 ## Live office demo
 
+[![The agency office, rotating while the team works](docs/media/office-live.gif)](https://minego90.github.io/marketing-studio-xr-app/demo/)
+
 Open the 3D agency office in your browser (no install, no keys): **https://minego90.github.io/marketing-studio-xr-app/demo/**. The team works and talks, you can rotate the office, and a side panel shows one real photo, the images Muse Image made from it, and an AI video. It reuses the same office code that runs inside the headset.
 
 ## Why
